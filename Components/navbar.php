@@ -7,17 +7,21 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav text-white">
                 <li class="nav-item">
-                    <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active text-white" aria-current="page" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="#">Features</a>
+                    <a class="nav-link text-white" href="/pages/ajoutetudiant.php">Etudiant</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="#">Pricing</a>
+                    <a class="nav-link text-white" href="/pages/ajoutenseignant.php">Enseignant</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled text-white" aria-disabled="true">Disabled</a>
+                    <a class="nav-link text-white" href="/pages/listeetudiants.php">Liste Etudiants</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/pages/ajoutsoutenance.php">Soutenance</a>
+                </li>
+
             </ul>
         </div>
     </div>

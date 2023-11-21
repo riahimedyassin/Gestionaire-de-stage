@@ -10,13 +10,8 @@
     <title>Mini Projet</title>
 </head>
 <body>
-    <?php
-        include "./Components/navbar.php";
-    ?>
     <div class="container">
-        <?php
-            include "./Pages/AjoutSoutenance.php";
-        ?>
+        <h1>Gestionnaire de stage</h1>
     </div>
     <script src="index.js"></script>
 </body>
