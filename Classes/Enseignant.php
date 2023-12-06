@@ -1,10 +1,10 @@
 <?php
-include "../connect/connect.php";
+include __DIR__ . "/../connect/connect.php";
 
 class Enseignant
 {
 
-    public function getAllTeachers()
+    public static function getAllTeachers()
     {
         global $cnx;
         $querry = "SELECT * FROM enseignant";
@@ -12,7 +12,7 @@ class Enseignant
         $donne = $res->fetchAll(PDO::FETCH_ASSOC);
         return count($donne) != 0 ? $donne : [];
     }
-    public function addTeacher(int $matricule, string $name, string $prenom): bool
+    public static function addTeacher(int $matricule, string $name, string $prenom): bool
     {
         global $cnx;
         $query = "INSERT INTO enseignant VALUES(:matricule,:nom,:prenom)";
@@ -24,7 +24,7 @@ class Enseignant
         $rowCount = $stmnt->rowCount();
         return $rowCount != 0;
     }
-    public function getSingleTeacher(string $matricule)
+    public static function getSingleTeacher(string $matricule)
     {
         global $cnx;
         $query = "SELECT * FROM enseignant WHERE matricule=:matricule";
@@ -36,6 +36,5 @@ class Enseignant
     }
 }
 
-$teacher_manager = new Enseignant();
 
 ?>

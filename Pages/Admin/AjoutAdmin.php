@@ -1,11 +1,5 @@
 <?php
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
-require_once "../Classes/Administrateur.php";
-if (!Administrateur::isAdmin()) {
-    Administrateur::logout();
-}
+    require_once "../../auth/requireAuth.php"; 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,14 +9,14 @@ if (!Administrateur::isAdmin()) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <?php
-    include "../Components/bootstrap.php";
+    include "../../utils/bootstrap.php";
     ?>
 </head>
 
 <body>
     <?php
-    include "../Components/navbar.php"; 
-        ?>
+    include "../../Components/navbar.php";
+    ?>
     <div class="container mt-5">
         <form method="post">
             <div class="mt-4">

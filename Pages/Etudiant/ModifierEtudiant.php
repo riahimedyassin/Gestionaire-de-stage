@@ -1,13 +1,7 @@
-<!DOCTYPE html>
 <?php
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
-require_once "../Classes/Administrateur.php";
-if (!Administrateur::isAdmin()) {
-    Administrateur::logout();
-}
+require_once "../../auth/requireAuth.php";
 ?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -15,20 +9,20 @@ if (!Administrateur::isAdmin()) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mofier Etudiant</title>
     <?php
-    include '../Components/bootstrap.php';
+    include "../../utils/bootstrap.php";
     ?>
 </head>
 
 <body>
     <?php
-    include '../Components/navbar.php';
-    include "../Classes/Etudiant.php";
+    include '../../Components/navbar.php';
+    require_once "../../Classes/Etudiant.php";
     ?>
     <div class="container mt-5">
         <form method="POST">
             <?php
 
-            $res = $etudiant_manager->getSingleStudent($_GET['id']);
+            $res = Etudiant::getSingleStudent($_GET['id']);
             if ($res == null)
                 header('Location : pages/ListeEtudiants.php');
             else {
@@ -49,7 +43,7 @@ if (!Administrateur::isAdmin()) {
             $prenom = $_POST['prenom'];
             $classe = $_POST['classe'];
             $nce = $_GET['id'];
-            $res = $etudiant_manager->updateStudent($nce, $nom, $prenom, $classe);
+            $res = Etudiant::updateStudent($nce, $nom, $prenom, $classe);
             echo $res ? "<h1> Changed Successfully </h1>" : "<h1> Cannot save </h1>";
         }
         ?>

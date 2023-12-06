@@ -7,26 +7,26 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav text-white">
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="/pages/ajoutetudiant.php">Etudiant</a>
+                    <a class="nav-link text-white" href="/pages/Etudiant/listeetudiants.php">Liste Etudiants</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="/pages/ajoutenseignant.php">Enseignant</a>
+                    <a class="nav-link text-white" href="/pages/Etudiant/ajoutetudiant.php">Etudiant</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="/pages/listeetudiants.php">Liste Etudiants</a>
+                    <a class="nav-link text-white" href="/pages/Enseignant/ajoutenseignant.php">Enseignant</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="/pages/ajoutsoutenance.php">Soutenance</a>
+                    <a class="nav-link text-white" href="/pages/Soutenance/ajoutsoutenance.php">Soutenance</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="/pages/rechercher.php">Chercher</a>
+                    <a class="nav-link text-white" href="/pages/Soutenance/rechercher.php">Chercher</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="/pages/ajoutadmin.php">Admin</a>
+                    <a class="nav-link text-white" href="/pages/admin/ajoutadmin.php">Admin</a>
                 </li>
 
             </ul>
         </div>
-        <a class="btn btn-danger" href="/pages/logout.php" >Logout</a>
+        <a class="btn btn-danger" href="/auth/logout.php" >Logout</a>
     </div>
 </nav>

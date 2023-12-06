@@ -1,11 +1,5 @@
 <?php
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
-require_once "../Classes/Administrateur.php";
-if (!Administrateur::isAdmin()) {
-    Administrateur::logout();
-}
+require_once "../../auth/requireAuth.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,16 +9,16 @@ if (!Administrateur::isAdmin()) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rechercher</title>
     <?php
-    include "../Components/bootstrap.php";
+    include "../../utils/bootstrap.php";
     ?>
 </head>
 
 <body>
     <?php
-    include "../Components/navbar.php";
-    include "../Classes/Enseignant.php";
-    include "../Classes/Soutenance.php";
-    include "../Classes/Etudiant.php";
+    include "../../Components/navbar.php";
+    require_once "../../Classes/Enseignant.php";
+    require_once "../../Classes/Soutenance.php";
+    require_once "../../Classes/Etudiant.php";
     ?>
     <div class="container mt-5">
         <h1>Checher une soutenance</h1>
@@ -32,7 +26,7 @@ if (!Administrateur::isAdmin()) {
             <label for="">Choisir un enseignat</label>
             <select class="form-select mb-4" name="enseignant">
                 <?php
-                $donne = $teacher_manager->getAllTeachers();
+                $donne = Enseignant::getAllTeachers();
                 for ($i = 0; $i < count($donne); $i++) {
                     echo "<option value=." . $donne[$i]['matricule'] . ".>" . $donne[$i]['nom'] . " " . $donne[$i]['prenom'] . " </option>";
                 }
@@ -46,14 +40,14 @@ if (!Administrateur::isAdmin()) {
         if (isset($_POST['submit'])) {
             $matricule = $_POST['enseignant'];
             $date = $_POST['date'];
-            $res = $soutenance_manager->searchSoutenance($matricule, $date);
+            $res = Soutenance::searchSoutenance($matricule, $date);
             if (count($res) == 0)
                 echo "<h1> Pas de soutenance </h1>";
             else {
                 echo '<table class="table"><tr><th>Etudiant</th><th>Enseignant</th><th>Date</th><th>Note</th></tr>';
                 for ($i = 0; $i < count($res); $i++) {
-                    $teacher = $teacher_manager->getSingleTeacher($res[$i]['matricule']);
-                    $etudiant = $etudiant_manager->getSingleStudent($res[$i]['nce']);
+                    $teacher = Enseignant::getSingleTeacher($res[$i]['matricule']);
+                    $etudiant = Etudiant::getSingleStudent($res[$i]['nce']);
                     echo "<tr>";
                     echo "<td>" . $etudiant['nom'] . "</td>";
                     echo "<td>" . $teacher['nom'] . "</td>";

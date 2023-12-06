@@ -1,9 +1,9 @@
 <?php
 
-include "../connect/connect.php";
+include __DIR__ . "/../connect/connect.php";
 class Etudiant
 {
-    public function getSingleStudent(int $nce)
+    public static function getSingleStudent(int $nce)
     {
         global $cnx;
         $query = "SELECT * FROM etudiant WHERE nce=:id";
@@ -18,7 +18,7 @@ class Etudiant
             return $res;
         }
     }
-    public function getAllStudents()
+    public static function getAllStudents()
     {
         global $cnx;
         $query = "SELECT * FROM etudiant";
@@ -28,7 +28,7 @@ class Etudiant
         else
             return [];
     }
-    public function updateStudent(int $nce, string $nom, string $prenom, string $classe)
+    public static function updateStudent(int $nce, string $nom, string $prenom, string $classe)
     {
         global $cnx;
         $querry = "UPDATE etudiant SET nom=:nom , prenom=:prenom ,  classe=:classe WHERE nce=:id";
@@ -43,7 +43,7 @@ class Etudiant
             return false;
         return true;
     }
-    public function addStudent(int $nce, string $nom, string $prenom, string $classe)
+    public static function addStudent(int $nce, string $nom, string $prenom, string $classe)
     {
         global $cnx;
         $query = "INSERT INTO etudiant VALUES(:nce,:nom,:prenom,:class)";
@@ -58,7 +58,7 @@ class Etudiant
             return false;
         return true;
     }
-    public function deleteStudent(int $nce)
+    public static function deleteStudent(int $nce)
     {
         global $cnx;
         $query = "DELETE FROM etudiant WHERE nce=:id";
@@ -66,10 +66,9 @@ class Etudiant
         $stmnt->bindParam(':id', $nce);
         $stmnt->execute();
         $deleted = $stmnt->rowCount();
-        return $deleted!=0 ;
+        return $deleted != 0;
     }
 }
-$etudiant_manager = new Etudiant();
 
 
 ?>

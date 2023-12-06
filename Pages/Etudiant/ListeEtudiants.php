@@ -1,11 +1,5 @@
 <?php
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
-require_once "../Classes/Administrateur.php";
-if (!Administrateur::isAdmin()) {
-    Administrateur::logout();
-}
+require_once "../../auth/requireAuth.php";
 ?>
 <!doctype html>
 <html lang="en">
@@ -17,13 +11,14 @@ if (!Administrateur::isAdmin()) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <?php
-    include "../Components/bootstrap.php";
+    include "../../utils/bootstrap.php";
     ?>
 </head>
 
 <body>
     <?php
-    include "../Components/navbar.php";
+    include "../../Components/navbar.php";
+    require_once "../../Classes/Etudiant.php";
     ?>
     <div class="container mt-5">
         <h1>Liste etudiant</h1>
@@ -36,8 +31,7 @@ if (!Administrateur::isAdmin()) {
                 <th>Action</th>
             </tr>
             <?php
-            include "../Classes/Etudiant.php";
-            $donne = $etudiant_manager->getAllStudents();
+            $donne = Etudiant::getAllStudents();
             for ($i = 0; $i < count($donne); $i++) {
                 echo "<tr><td>" . $donne[$i]['nce'] . "</td>";
                 echo "<td>" . $donne[$i]['nom'] . "</td>";

@@ -8,11 +8,11 @@ if (!isset($email) || !isset($password)) {
 }
 $res = Administrateur::login($email, $password);
 if ($res) {
-    header('Location: ListeEtudiants.php');
+    header('Location: /pages/Etudiant/ListeEtudiants.php');
     exit();
 } else {
     header('location: ../index.php');
-    echo '<div class="alert alert-danger"> Invalid Email or Password </div>';
+    exit(); 
 }
 
 ?>

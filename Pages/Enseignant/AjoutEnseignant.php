@@ -1,11 +1,5 @@
 <?php
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
-require_once "../Classes/Administrateur.php";
-if (!Administrateur::isAdmin()) {
-    Administrateur::logout();
-}
+require_once "../../auth/requireAuth.php";
 ?>
 <!doctype html>
 <html lang="en">
@@ -17,14 +11,14 @@ if (!Administrateur::isAdmin()) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <?php
-    include "../Components/bootstrap.php";
-
+    include "../../utils/bootstrap.php";
     ?>
 </head>
 
 <body>
     <?php
-    include "../Components/navbar.php";
+    include "../../Components/navbar.php";
+    require_once "../../Classes/Enseignant.php";
     ?>
     <div class="container">
         <form method="post" name="frm" class="mt-5">
@@ -43,12 +37,11 @@ if (!Administrateur::isAdmin()) {
         </form>
     </div>
     <?php
-    include "../Classes/Enseignant.php";
     if (isset($_POST['submit'])) {
         $name = $_POST['nom'];
         $prenom = $_POST['prenom'];
         $matricule = $_POST['matricule'];
-        $res = $teacher_manager->addTeacher($matricule, $name, $prenom);
+        $res = Enseignant::addTeacher($matricule, $name, $prenom);
         if ($res)
             echo "<h1>Ajout avec succés</h1> ";
         else

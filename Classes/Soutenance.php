@@ -1,9 +1,9 @@
 <?php
-include "../connect/connect.php";
+include __DIR__ . "/../connect/connect.php";
 class Soutenance
 {
 
-    public function addSoutenance(string $numjury, string $date, string $etud, string $ens, string $note): bool
+    public static function addSoutenance(string $numjury, string $date, string $etud, string $ens, string $note): bool
     {
         global $cnx;
         $query = "INSERT INTO soutenance VALUES(:numjury,:date_soutenance,:note,:nce,:matricule)";
@@ -17,7 +17,7 @@ class Soutenance
         $rowCount = $stmnt->rowCount();
         return $rowCount != 0;
     }
-    public function searchSoutenance(string $matricule, string $date)
+    public static function searchSoutenance(string $matricule, string $date)
     {
         global $cnx;
         $qurey = "SELECT * FROM soutenance WHERE matricule=:matricule AND `date soutenance`=:dat";
@@ -35,6 +35,5 @@ class Soutenance
     }
 
 }
-$soutenance_manager = new Soutenance();
 
 ?>
