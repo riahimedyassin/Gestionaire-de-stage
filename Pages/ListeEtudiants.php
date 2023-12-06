@@ -1,3 +1,12 @@
+<?php
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+require_once "../Classes/Administrateur.php";
+if (!Administrateur::isAdmin()) {
+    Administrateur::logout();
+}
+?>
 <!doctype html>
 <html lang="en">
 
@@ -16,7 +25,7 @@
     <?php
     include "../Components/navbar.php";
     ?>
-    <div class="container">
+    <div class="container mt-5">
         <h1>Liste etudiant</h1>
         <table class="table table-striped table-bordered">
             <tr class="table-secondary">

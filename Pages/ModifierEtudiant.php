@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <?php
-    require_once "../Classes/Administrateur.php"; 
-    session_start();
-    if(!$admin_manager->isAdmin()) {
-        $admin_manager->logout();
-    }
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+require_once "../Classes/Administrateur.php";
+if (!Administrateur::isAdmin()) {
+    Administrateur::logout();
+}
 ?>
 <html lang="en">
 
@@ -48,7 +50,7 @@
             $classe = $_POST['classe'];
             $nce = $_GET['id'];
             $res = $etudiant_manager->updateStudent($nce, $nom, $prenom, $classe);
-            echo $res ? "<h1> Changed Successfully </h1>" : "<h1> Cannot save </h1>" ; 
+            echo $res ? "<h1> Changed Successfully </h1>" : "<h1> Cannot save </h1>";
         }
         ?>
     </div>

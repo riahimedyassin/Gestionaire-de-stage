@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -34,18 +33,10 @@
     </div>
     <script src="index.js"></script>
     <?php
-    include "./Classes/Administrateur.php"; 
     if (isset($_POST['login'])) {
         $email = $_POST['email'];
         $password = $_POST['password'];
-        $res = $admin_manager->login($email,$password);
-        if($res) {
-            header('Location: Pages/ListeEtudiants.php');
-            exit(); 
-        }
-        else {
-            echo '<div class="alert alert-danger"> Invalid Email or Password </div>' ; 
-        }
+        header('location: /pages/login.php?email='.$email.'&password='.$password); 
     }
     ?>
 </body>

@@ -21,6 +21,9 @@
                 <li class="nav-item">
                     <a class="nav-link text-white" href="/pages/rechercher.php">Chercher</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/pages/ajoutadmin.php">Admin</a>
+                </li>
 
             </ul>
         </div>
