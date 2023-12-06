@@ -7,9 +7,6 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav text-white">
                 <li class="nav-item">
-                    <a class="nav-link active text-white" aria-current="page" href="/">Home</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link text-white" href="/pages/ajoutetudiant.php">Etudiant</a>
                 </li>
                 <li class="nav-item">
@@ -27,5 +24,6 @@
 
             </ul>
         </div>
+        <a class="btn btn-danger" href="/pages/logout.php" >Logout</a>
     </div>
 </nav>

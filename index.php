@@ -15,9 +15,6 @@
 </head>
 
 <body>
-    <?php
-    include "./Components/navbar.php";
-    ?>
     <div class="container">
         <div>
             <h1>Gestionnaire de stage</h1>
@@ -37,18 +34,18 @@
     </div>
     <script src="index.js"></script>
     <?php
-    include "./connect/connect.php";
+    include "./Classes/Administrateur.php"; 
     if (isset($_POST['login'])) {
         $email = $_POST['email'];
         $password = $_POST['password'];
-        $query = "SELECT * FROM administrateur WHERE login = :email AND mot_de_passe = :password ";
-        $sth = $cnx->prepare($query);
-        $sth->bindParam('email',$email);
-        $sth->bindParam('password',$password);
-        $sth->execute(); 
-        $result = $sth->fetch(PDO::FETCH_ASSOC); 
-        if($result) echo "LOGGED IN";
-        else echo "NOT LOGGED IN" ; 
+        $res = $admin_manager->login($email,$password);
+        if($res) {
+            header('Location: Pages/ListeEtudiants.php');
+            exit(); 
+        }
+        else {
+            echo '<div class="alert alert-danger"> Invalid Email or Password </div>' ; 
+        }
     }
     ?>
 </body>

@@ -1,4 +1,11 @@
 <!DOCTYPE html>
+<?php
+    require_once "../Classes/Administrateur.php"; 
+    session_start();
+    if(!$admin_manager->isAdmin()) {
+        $admin_manager->logout();
+    }
+?>
 <html lang="en">
 
 <head>
