@@ -37,8 +37,7 @@
     </div>
     <script src="index.js"></script>
     <?php
-    include "connect/dbconfig.php";
-    include "connect/connect.php";
+    include "./connect/connect.php";
     if (isset($_POST['login'])) {
         $email = $_POST['email'];
         $password = $_POST['password'];

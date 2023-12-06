@@ -32,19 +32,14 @@ include "../Components/navbar.php";
         </form>
     </div>
 <?php
-    include "../connect/connect.php" ;
+    include "../Classes/Enseignant.php"; 
     if(isset($_POST['submit'])) {
         $name = $_POST['nom'];
         $prenom = $_POST['prenom'];
         $matricule = $_POST['matricule'];
-        $query = "INSERT INTO enseignant VALUES(:matricule,:nom,:prenom)";
-        $stmnt = $cnx->prepare($query);
-        $stmnt->bindParam('nom',$name);
-        $stmnt->bindParam('prenom',$prenom);
-        $stmnt->bindParam('matricule',$matricule);
-        $nb = $stmnt->execute();
-        if($nb!=0) echo "Ajout avec succés " ;
-        else echo "Ajout echoué";
+        $res = $teacher_manager->addTeacher($matricule,$name,$prenom);
+        if($res) echo "<h1>Ajout avec succés</h1> " ;
+        else echo "<h1>Ajout echoué</h1> " ;
     }
 ?>
 

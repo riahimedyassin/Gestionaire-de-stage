@@ -1,9 +1,8 @@
 <?php
-    require_once "./connect/dbconfig.php";
-   try {
+require_once(__DIR__ . '/../connect/dbconfig.php');
+try {
 
-       $cnx = new PDO("mysql:host=$host;dbname=$dbname", $username,$password);
-   }
-   catch (PDOException $err) {
-        echo $err ;
+    $cnx = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+} catch (PDOException $err) {
+    echo $err;
 }
