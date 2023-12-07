@@ -27,12 +27,53 @@ class Enseignant
     public static function getSingleTeacher(string $matricule)
     {
         global $cnx;
-        $query = "SELECT * FROM enseignant WHERE matricule=:matricule";
-        $stmnt = $cnx->prepare($query);
-        $stmnt->bindParam(':matricule', $matricule);
-        $stmnt->execute();
-        $res = $stmnt->fetch(PDO::FETCH_ASSOC);
-        return $res;
+        try {
+            $query = "SELECT * FROM enseignant WHERE matricule=:matricule";
+            $stmnt = $cnx->prepare($query);
+            $stmnt->bindParam(':matricule', $matricule);
+            $stmnt->execute();
+            $rowCount = $stmnt->rowCount();
+            if ($rowCount != 0) {
+                $res = $stmnt->fetch(PDO::FETCH_ASSOC);
+                return $res;
+            }
+            return null;
+        } catch (Exception $e) {
+            return null;
+        }
+    }
+    public static function updateTeacher(string $matricule, string $nom, string $prenom)
+    {
+        global $cnx;
+        try {
+            $query = "UPDATE enseignant SET nom=:nom , prenom=:prenom WHERE matricule=:matricule";
+            $stmnt = $cnx->prepare($query);
+            $stmnt->bindParam(':nom', $nom);
+            $stmnt->bindParam(':prenom', $prenom);
+            $stmnt->bindParam(':matricule', $matricule);
+            $stmnt->execute();
+            $rowCount = $stmnt->rowCount();
+            return $rowCount != 0;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+    public static function deleteTeacher(string $matricule)
+    {
+        global $cnx;
+        try {
+            $query = "DELETE FROM enseignant WHERE matricule=:matricule";
+            $stmnt = $cnx->prepare($query);
+            $stmnt->bindParam("matricule", $matricule);
+            $stmnt->execute();
+            $rowCount = $stmnt->rowCount();
+            if ($rowCount != 0)
+                return true;
+            return false;
+
+        } catch (Exception $e) {
+            return false;
+        }
     }
 }
 

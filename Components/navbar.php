@@ -7,19 +7,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav text-white">
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="/pages/Etudiant/listeetudiants.php">Liste Etudiants</a>
+                    <a class="nav-link text-white" href="/pages/Etudiant/listeetudiants.php">Etudiant</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="/pages/Etudiant/ajoutetudiant.php">Etudiant</a>
+                    <a class="nav-link text-white" href="/pages/Enseignant/ListeEnseignants.php">Enseignant</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="/pages/Enseignant/ajoutenseignant.php">Enseignant</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/pages/Soutenance/ajoutsoutenance.php">Soutenance</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/pages/Soutenance/rechercher.php">Chercher</a>
+                    <a class="nav-link text-white" href="/pages/Soutenance/ListeSoutenances.php">Soutenance</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" href="/pages/admin/ajoutadmin.php">Admin</a>

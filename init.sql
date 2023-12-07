@@ -19,8 +19,8 @@ CREATE TABLE administrateur (
     note DOUBLE , 
     nce INT ,
     matricule INT, 
-    FOREIGN KEY (nce) REFERENCES etudiant(nce),
-    FOREIGN KEY (matricule) REFERENCES enseignant(matricule)
+    FOREIGN KEY (nce) REFERENCES etudiant(nce) ON DELETE CASCADE,
+    FOREIGN KEY (matricule) REFERENCES enseignant(matricule) ON DELETE CASCADE
 ); 
 
 

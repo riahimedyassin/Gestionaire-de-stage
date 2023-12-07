@@ -7,7 +7,7 @@ require_once "../../auth/requireAuth.php";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rechercher</title>
+    <title>Rechercher Soutenance</title>
     <?php
     include "../../utils/bootstrap.php";
     ?>
@@ -23,7 +23,7 @@ require_once "../../auth/requireAuth.php";
         <form method="post">
             <label for="">Choisir un enseignat</label>
             <select class="form-select mb-4" name="enseignant">
-                <option value="null" disabled selected >Choisir un(e) enseignant(e)</option>
+                <option value="null" disabled selected>Choisir un(e) enseignant(e)</option>
                 <?php
                 $donne = Enseignant::getAllTeachers();
                 for ($i = 0; $i < count($donne); $i++) {
@@ -38,7 +38,7 @@ require_once "../../auth/requireAuth.php";
         <?php
         if (isset($_POST['submit'])) {
             if (!isset($_POST['enseignant']) || !isset($_POST['date'])) {
-                CustomError::displayError('FIELDS'); 
+                CustomError::displayError('FIELDS');
             } else {
                 $matricule = $_POST['enseignant'];
                 $date = $_POST['date'];
@@ -51,8 +51,8 @@ require_once "../../auth/requireAuth.php";
                         $teacher = Enseignant::getSingleTeacher($res[$i]['matricule']);
                         $etudiant = Etudiant::getSingleStudent($res[$i]['nce']);
                         echo "<tr>";
-                        echo "<td>" . $etudiant['nom'] . "</td>";
-                        echo "<td>" . $teacher['nom'] . "</td>";
+                        echo "<td>" . $etudiant['nom'] . " " . $etudiant['prenom'] . "</td>";
+                        echo "<td>" . $teacher['nom'] . " " . $teacher['prenom'] . "</td>";
                         echo "<td>" . $res[$i]['date soutenance'] . "</td>";
                         echo "<td>" . $res[$i]['note'] . "</td>";
                         echo "</tr>";

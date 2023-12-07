@@ -9,7 +9,7 @@ require_once "../../auth/requireAuth.php";
     <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Liste Etudiants</title>
+    <title>Liste Enseignants</title>
     <?php
     include "../../utils/bootstrap.php";
     ?>
@@ -22,29 +22,27 @@ require_once "../../auth/requireAuth.php";
     ?>
     <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center">
-        <h1>Liste Etudiant</h1>
-        <a class="btn btn-success" href="/pages/Etudiant/ajoutetudiant.php">Ajouter</a>
+        <h1>Liste Enseignant</h1>
+        <a class="btn btn-success" href="/pages/Enseignant/AjoutEnseignant.php">Ajouter</a>
         </div>
         <table class="table table-striped  mt-4 text-center">
             <tr class="table-primary">
-                <th>NCE</th>
+                <th>Matricule</th>
                 <th>Nom</th>
                 <th>Prenom</th>
-                <th>Classe</th>
-                <th>Action</th>
+                <th>Actions</th>
             </tr>
             <?php
-            $donne = Etudiant::getAllStudents();
+            $donne = Enseignant::getAllTeachers();
             if (count($donne) == 0) {
                 echo "<tr ><td colspan='5' ><h2 class='text-danger'>Pas d'etudiant ajouter</h2></td></tr>";
             } else {
                 for ($i = 0; $i < count($donne); $i++) {
-                    echo "<tr><td>" . $donne[$i]['nce'] . "</td>";
+                    echo "<tr><td>" . $donne[$i]['matricule'] . "</td>";
                     echo "<td>" . $donne[$i]['nom'] . "</td>";
                     echo "<td>" . $donne[$i]['prenom'] . "</td>";
-                    echo "<td>" . $donne[$i]['classe'] . "</td>";
-                    echo "<td> <a class='btn btn-warning'" . "href='ModifierEtudiant.php?id=" . $donne[$i]['nce'] . "'" . ">Modifier</a> ";
-                    echo "<a class='btn btn-danger'" . "href='SupprimerEtudiant.php?id=" . $donne[$i]['nce'] . "'" . ">Supprimer</a></td> ";
+                    echo "<td> <a class='btn btn-warning'" . "href='ModifierEnseignant.php?id=" . $donne[$i]['matricule'] . "'" . ">Modifier</a> ";
+                    echo "<a class='btn btn-danger'" . "href='SupprimerEnseignant.php?id=" . $donne[$i]['matricule'] . "'" . ">Supprimer</a></td> ";
                     echo "</tr>";
                 }
             }

@@ -22,33 +22,30 @@ require_once "../../auth/requireAuth.php";
         <form method="POST">
             <?php
 
-            $res = Etudiant::getSingleStudent($_GET['id']);
+            $res = Enseignant::getSingleTeacher($_GET['id']);
             if ($res == null)
-                header('Location: /pages/Etudiant/ListeEtudiants.php');
+                header('Location : pages/ListeEtudiants.php');
             else {
-                echo '<h1> Etudiant : ' . $res['nom'] . " " . $res['prenom'] . "</h1>";
-                echo "<label>Nom etudiant</label>";
+                echo '<h1> Enseignant : ' . $res['nom'] . " " . $res['prenom'] . "</h1>";
+                echo "<label>Nom enseignant</label>";
                 echo '<input type="text" class="form-control" name="nom" value="' . $res['nom'] . '" />';
-                echo "<label>Prenom etudiant</label>";
+                echo "<label>Prenom enseignant</label>";
                 echo '<input type="text" class="form-control" name="prenom" value="' . $res['prenom'] . '" />';
-                echo "<label>Classe etudiant</label>";
-                echo '<input type="text" class="form-control" name="classe" value="' . $res['classe'] . '" />';
             }
             ?>
             <div class="d-flex align-items-center gap-4 mt-4">
                 <button class="btn btn-success " type="submit" name="submit">Save</button>
-                <?php
-                echo "<a class='btn btn-danger'" . "href='SupprimerEtudiant.php?id=" . $res['nce'] . "'" . ">Supprimer</a></td> ";
-                ?>
+                <!-- <?php
+                echo "<a class='btn btn-danger'" . "href='SupprimerEnseignant.php?id=" . $res['nce'] . "'" . ">Supprimer</a></td> ";
+                ?> -->
             </div>
         </form>
         <?php
         if (isset($_POST['submit'])) {
             $nom = $_POST['nom'];
             $prenom = $_POST['prenom'];
-            $classe = $_POST['classe'];
-            $nce = $_GET['id'];
-            $res = Etudiant::updateStudent($nce, $nom, $prenom, $classe);
+            $matricule = $_GET['id'];
+            $res = Enseignant::updateTeacher($matricule, $nom, $prenom);
             echo $res ? "<h1> Changed Successfully </h1>" : "<h1> Cannot save </h1>";
         }
         ?>
