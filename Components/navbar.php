@@ -16,7 +16,7 @@
                     <a class="nav-link text-white" href="/pages/Soutenance/ListeSoutenances.php">Soutenance</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="/pages/admin/ajoutadmin.php">Admin</a>
+                    <a class="nav-link text-white" href="/pages/admin/ListeAdmins.php">Admin</a>
                 </li>
 
             </ul>

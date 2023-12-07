@@ -8,11 +8,11 @@ class Administrateur
     {
         try {
             $res = self::getAdmin($email);
-            
+
             if ($res == null)
                 return false;
             $hashed = $res['mot_de_passe'];
-            if (!password_verify($password,$hashed))
+            if (!password_verify($password, $hashed))
                 return false;
             else {
                 $_SESSION['ok'] = 'ok';
@@ -26,7 +26,6 @@ class Administrateur
     }
     public static function isAuth(): bool
     {
-        if(!isset($_SESSION['email']) || !isset($_SESSION['password'])) return false ; 
         $email = $_SESSION['email'];
         $hashed = $_SESSION['password'];
         $res = self::getAdmin($email);
@@ -94,6 +93,43 @@ class Administrateur
         } catch (Exception $e) {
             return 0;
         }
+    }
+    public static function getAllAdmins()
+    {
+        global $cnx;
+        $query = "SELECT login,id_admin FROM administrateur";
+        $res = $cnx->query($query);
+        if ($res)
+            return $res->fetchAll(PDO::FETCH_ASSOC);
+        else
+            return [];
+    }
+    public static function getSession()
+    {
+        return $_SESSION['email'];
+    }
+    public static function getSingleAdmin(string $email) {
+        global $cnx;
+        $query = "SELECT * FROM administrateur WHERE id_admin=:email";
+        $stmnt = $cnx->prepare($query);
+        $stmnt->bindParam(':email', $email);
+        $stmnt->execute();
+        $rowCount = $stmnt->rowCount();
+        if ($rowCount == 0)
+            return null;
+        else {
+            $res = $stmnt->fetch(PDO::FETCH_ASSOC);
+            return $res;
+        }
+    }
+    public static function deleteAdmin(string $id_admin) {
+        global $cnx;
+        $query = "DELETE FROM administrateur WHERE id_admin=:id";
+        $stmnt = $cnx->prepare($query);
+        $stmnt->bindParam(':id', $id_admin);
+        $stmnt->execute();
+        $deleted = $stmnt->rowCount();
+        return $deleted != 0;
     }
 }
 ?>
