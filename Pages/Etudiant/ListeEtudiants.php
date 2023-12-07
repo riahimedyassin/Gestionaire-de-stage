@@ -18,7 +18,7 @@ require_once "../../auth/requireAuth.php";
 <body>
     <?php
     include "../../Components/navbar.php";
-    require_once "../../Classes/Etudiant.php";
+    require_once "../../utils/imports.php";
     ?>
     <div class="container mt-5">
         <h1>Liste etudiant</h1>
@@ -32,14 +32,18 @@ require_once "../../auth/requireAuth.php";
             </tr>
             <?php
             $donne = Etudiant::getAllStudents();
-            for ($i = 0; $i < count($donne); $i++) {
-                echo "<tr><td>" . $donne[$i]['nce'] . "</td>";
-                echo "<td>" . $donne[$i]['nom'] . "</td>";
-                echo "<td>" . $donne[$i]['prenom'] . "</td>";
-                echo "<td>" . $donne[$i]['classe'] . "</td>";
-                echo "<td> <a class='btn btn-warning'" . "href='ModifierEtudiant.php?id=" . $donne[$i]['nce'] . "'" . ">Modifier</a> ";
-                echo "<a class='btn btn-danger'" . "href='SupprimerEtudiant.php?id=" . $donne[$i]['nce'] . "'" . ">Supprimer</a></td> ";
-                echo "</tr>";
+            if (count($donne) == 0) {
+                echo "<h2>Pas d'etudiant ajouter </h2>";
+            } else {
+                for ($i = 0; $i < count($donne); $i++) {
+                    echo "<tr><td>" . $donne[$i]['nce'] . "</td>";
+                    echo "<td>" . $donne[$i]['nom'] . "</td>";
+                    echo "<td>" . $donne[$i]['prenom'] . "</td>";
+                    echo "<td>" . $donne[$i]['classe'] . "</td>";
+                    echo "<td> <a class='btn btn-warning'" . "href='ModifierEtudiant.php?id=" . $donne[$i]['nce'] . "'" . ">Modifier</a> ";
+                    echo "<a class='btn btn-danger'" . "href='SupprimerEtudiant.php?id=" . $donne[$i]['nce'] . "'" . ">Supprimer</a></td> ";
+                    echo "</tr>";
+                }
             }
             ?>
         </table>

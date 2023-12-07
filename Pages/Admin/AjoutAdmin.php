@@ -18,6 +18,7 @@
     include "../../Components/navbar.php";
     ?>
     <div class="container mt-5">
+        <h1>Ajouter un administrateur</h1>
         <form method="post">
             <div class="mt-4">
                 <input type="email" class="form-control" placeholder="Email de l'admin" name="email" required>

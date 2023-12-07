@@ -18,7 +18,7 @@ require_once "../../auth/requireAuth.php";
 <body>
     <?php
     include "../../Components/navbar.php";
-    require_once "../../Classes/Enseignant.php";
+    require_once "../../utils/imports.php";
     ?>
     <div class="container">
         <form method="post" name="frm" class="mt-5">
@@ -38,14 +38,18 @@ require_once "../../auth/requireAuth.php";
     </div>
     <?php
     if (isset($_POST['submit'])) {
-        $name = $_POST['nom'];
-        $prenom = $_POST['prenom'];
-        $matricule = $_POST['matricule'];
-        $res = Enseignant::addTeacher($matricule, $name, $prenom);
-        if ($res)
-            echo "<h1>Ajout avec succés</h1> ";
-        else
-            echo "<h1>Ajout echoué</h1> ";
+        if (!isset($_POST['nom']) || !isset($_POST['prenom']) || !isset($_POST['matricule'])) {
+            CustomError::displayError('FIELDS'); 
+        } else {
+            $name = $_POST['nom'];
+            $prenom = $_POST['prenom'];
+            $matricule = $_POST['matricule'];
+            $res = Enseignant::addTeacher($matricule, $name, $prenom);
+            if ($res)
+                echo "<h1>Ajout avec succés</h1> ";
+            else
+                echo "<h1>Ajout echoué</h1> ";
+        }
     }
     ?>
 

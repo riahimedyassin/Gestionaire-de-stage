@@ -19,9 +19,7 @@ require_once "../../auth/requireAuth.php";
 <body>
     <?php
     include "../../Components/navbar.php";
-    require_once "../../Classes/Etudiant.php";
-    require_once "../../Classes/Enseignant.php";
-    require_once "../../Classes/Soutenance.php";
+    require_once "../../utils/imports.php";
     ?>
     <div class="container">
         <form method="post" name="frm" class="mt-5">
@@ -47,7 +45,7 @@ require_once "../../auth/requireAuth.php";
             <label class="mt-4">Choisir l'enseignant</label>
             <select class="form-select mb-4" name="enseignant">
                 <?php
-                
+
                 $donne = Enseignant::getAllTeachers();
                 for ($i = 0; $i < count($donne); $i++) {
                     echo "<option value=." . $donne[$i]['matricule'] . ".>" . $donne[$i]['nom'] . " " . $donne[$i]['prenom'] . " </option>";
@@ -60,15 +58,18 @@ require_once "../../auth/requireAuth.php";
     </div>
 
     <?php
-   
     if (isset($_POST['submit'])) {
-        $ens = $_POST['enseignant'];
-        $etud = $_POST['etudiant'];
-        $numjury = $_POST['numjury'];
-        $date = $_POST['date'];
-        $note = $_POST['note'];
-        $res = Soutenance::addSoutenance($numjury, $date, $etud, $ens, $note);
-        echo $res ? "<h1>Ajout avec success</h1>" : "<h1>Ajout echoué</h1>";
+        if (!isset($_POST['enseignant']) || !isset($_POST['etudiant']) || !isset($_POST['numjury']) || !isset($_POST['date']) || !isset($_POST['note'])) {
+            include "../../Components/error.php"; 
+        } else {
+            $ens = $_POST['enseignant'];
+            $etud = $_POST['etudiant'];
+            $numjury = $_POST['numjury'];
+            $date = $_POST['date'];
+            $note = $_POST['note'];
+            $res = Soutenance::addSoutenance($numjury, $date, $etud, $ens, $note);
+            echo $res ? "<h1>Ajout avec success</h1>" : "<h1>Ajout echoué</h1>";
+        }
     }
     ?>
 </body>

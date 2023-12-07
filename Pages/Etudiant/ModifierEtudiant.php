@@ -16,7 +16,7 @@ require_once "../../auth/requireAuth.php";
 <body>
     <?php
     include '../../Components/navbar.php';
-    require_once "../../Classes/Etudiant.php";
+    require_once "../../utils/imports.php";
     ?>
     <div class="container mt-5">
         <form method="POST">

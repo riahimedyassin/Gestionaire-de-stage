@@ -16,15 +16,14 @@ require_once "../../auth/requireAuth.php";
 <body>
     <?php
     include "../../Components/navbar.php";
-    require_once "../../Classes/Enseignant.php";
-    require_once "../../Classes/Soutenance.php";
-    require_once "../../Classes/Etudiant.php";
+    require_once "../../utils/imports.php";
     ?>
     <div class="container mt-5">
         <h1>Checher une soutenance</h1>
         <form method="post">
             <label for="">Choisir un enseignat</label>
             <select class="form-select mb-4" name="enseignant">
+                <option value="null" disabled selected >Choisir un(e) enseignant(e)</option>
                 <?php
                 $donne = Enseignant::getAllTeachers();
                 for ($i = 0; $i < count($donne); $i++) {
@@ -38,24 +37,28 @@ require_once "../../auth/requireAuth.php";
         </form>
         <?php
         if (isset($_POST['submit'])) {
-            $matricule = $_POST['enseignant'];
-            $date = $_POST['date'];
-            $res = Soutenance::searchSoutenance($matricule, $date);
-            if (count($res) == 0)
-                echo "<h1> Pas de soutenance </h1>";
-            else {
-                echo '<table class="table"><tr><th>Etudiant</th><th>Enseignant</th><th>Date</th><th>Note</th></tr>';
-                for ($i = 0; $i < count($res); $i++) {
-                    $teacher = Enseignant::getSingleTeacher($res[$i]['matricule']);
-                    $etudiant = Etudiant::getSingleStudent($res[$i]['nce']);
-                    echo "<tr>";
-                    echo "<td>" . $etudiant['nom'] . "</td>";
-                    echo "<td>" . $teacher['nom'] . "</td>";
-                    echo "<td>" . $res[$i]['date soutenance'] . "</td>";
-                    echo "<td>" . $res[$i]['note'] . "</td>";
-                    echo "</tr>";
+            if (!isset($_POST['enseignant']) || !isset($_POST['date'])) {
+                CustomError::displayError('FIELDS'); 
+            } else {
+                $matricule = $_POST['enseignant'];
+                $date = $_POST['date'];
+                $res = Soutenance::searchSoutenance($matricule, $date);
+                if (count($res) == 0)
+                    echo "<h1> Pas de soutenance </h1>";
+                else {
+                    echo '<table class="table"><tr><th>Etudiant</th><th>Enseignant</th><th>Date</th><th>Note</th></tr>';
+                    for ($i = 0; $i < count($res); $i++) {
+                        $teacher = Enseignant::getSingleTeacher($res[$i]['matricule']);
+                        $etudiant = Etudiant::getSingleStudent($res[$i]['nce']);
+                        echo "<tr>";
+                        echo "<td>" . $etudiant['nom'] . "</td>";
+                        echo "<td>" . $teacher['nom'] . "</td>";
+                        echo "<td>" . $res[$i]['date soutenance'] . "</td>";
+                        echo "<td>" . $res[$i]['note'] . "</td>";
+                        echo "</tr>";
+                    }
+                    echo '</table> ';
                 }
-                echo '</table> ';
             }
         }
 
